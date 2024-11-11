@@ -1,6 +1,6 @@
 import prisma from "../../../shared/prisma";
 import { Prisma } from "@prisma/client";
-import { TBook } from "./Book.interface";
+import { TBook, TBookUpdate } from "./Book.interface";
 
 // Define createBook function to insert a new book into the database
 const createBook = async (payload: Prisma.BookCreateInput): Promise<TBook> => {
@@ -22,8 +22,36 @@ const getSingleBooks = async (bookId: string) => {
   return book;
 };
 
+const updateBook = async (
+  bookId: string,
+  payload: Partial<TBookUpdate>
+): Promise<TBook> => {
+  const { title, genre, publishedYear, totalCopies, availableCopies } = payload;
+  const updatedBook = await prisma.book.update({
+    where: { bookId: bookId },
+    data: {
+      title,
+      genre,
+      publishedYear,
+      totalCopies,
+      availableCopies,
+    },
+  });
+  return updatedBook;
+};
+
+const deleteBook = async (bookId: string) => {
+  const result = await prisma.book.delete({
+    where: { bookId: bookId },
+  });
+
+  return result;
+};
+
 export const BookService = {
   createBook,
   getAllBooks,
   getSingleBooks,
+  updateBook,
+  deleteBook,
 };

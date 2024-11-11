@@ -46,8 +46,29 @@ const getSingleBookfromDb = (0, catchAsync_1.default)((req, res) => __awaiter(vo
         data: result,
     });
 }));
+const updateBookIntoDb = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { bookId } = req.params;
+    const result = yield book_service_1.BookService.updateBook(bookId, req.body);
+    (0, SendResponse_1.default)(res, {
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: "Book updated successfully",
+        data: result,
+    });
+});
+const deleteBookfromDb = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { bookId } = req.params;
+    const result = yield book_service_1.BookService.deleteBook(bookId);
+    (0, SendResponse_1.default)(res, {
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: "Book successfully deleted",
+    });
+});
 exports.BookController = {
     inserBookIntoDB,
     getAllBooksfromDb,
     getSingleBookfromDb,
+    updateBookIntoDb,
+    deleteBookfromDb,
 };

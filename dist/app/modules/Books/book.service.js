@@ -31,8 +31,30 @@ const getSingleBooks = (bookId) => __awaiter(void 0, void 0, void 0, function* (
     });
     return book;
 });
+const updateBook = (bookId, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title, genre, publishedYear, totalCopies, availableCopies } = payload;
+    const updatedBook = yield prisma_1.default.book.update({
+        where: { bookId: bookId },
+        data: {
+            title,
+            genre,
+            publishedYear,
+            totalCopies,
+            availableCopies,
+        },
+    });
+    return updatedBook;
+});
+const deleteBook = (bookId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield prisma_1.default.book.delete({
+        where: { bookId: bookId },
+    });
+    return result;
+});
 exports.BookService = {
     createBook,
     getAllBooks,
     getSingleBooks,
+    updateBook,
+    deleteBook,
 };
