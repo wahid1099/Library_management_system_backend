@@ -7,7 +7,7 @@ const UserSchemaCreate = zod_1.z.object({
     name: zod_1.z.string().min(1, "Name is required"),
     email: zod_1.z.string().email("Invalid email format"),
     phone: zod_1.z.string().min(10, "Phone number is required"),
-    membershipDate: zod_1.z.date(),
+    membershipDate: zod_1.z.string().transform((val) => new Date(val)),
 });
 // Member update validation schema (most fields optional)
 const UserSchemaUpdate = zod_1.z.object({
@@ -15,7 +15,10 @@ const UserSchemaUpdate = zod_1.z.object({
     name: zod_1.z.string().min(1).optional(),
     email: zod_1.z.string().email().optional(),
     phone: zod_1.z.string().min(10).optional(),
-    membershipDate: zod_1.z.date().optional(),
+    membershipDate: zod_1.z
+        .string()
+        .transform((val) => new Date(val))
+        .optional(),
 });
 exports.MemberValidationSchema = {
     UserSchemaCreate,
