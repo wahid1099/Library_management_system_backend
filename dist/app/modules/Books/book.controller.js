@@ -18,7 +18,6 @@ const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
 const book_service_1 = require("./book.service");
 const inserBookIntoDB = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
     const result = yield book_service_1.BookService.createBook(req.body);
     (0, SendResponse_1.default)(res, {
         success: true,

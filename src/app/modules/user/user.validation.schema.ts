@@ -2,7 +2,6 @@ import { z } from "zod";
 
 // Member creation validation schema (all fields required)
 const UserSchemaCreate = z.object({
-  memberId: z.string().uuid(),
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email format"),
   phone: z.string().min(10, "Phone number is required"),

@@ -6,7 +6,6 @@ import pick from "../../../shared/pick";
 import { BookService } from "./book.service";
 
 const inserBookIntoDB = catchAsync(async (req: Request, res: Response) => {
-  console.log(req.body);
   const result = await BookService.createBook(req.body);
 
   sendResponse(res, {
