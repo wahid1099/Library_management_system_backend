@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
+const ApiError_1 = __importDefault(require("../../errors/ApiError"));
+const http_status_1 = __importDefault(require("http-status"));
 // Define createBook function to insert a new book into the database
 const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const newBook = yield prisma_1.default.member.create({
@@ -29,6 +31,9 @@ const getSingleUser = (UserId) => __awaiter(void 0, void 0, void 0, function* ()
     const user = yield prisma_1.default.member.findUnique({
         where: { memberId: UserId },
     });
+    if (!user) {
+        return new ApiError_1.default(http_status_1.default.NOT_FOUND, "User Not found");
+    }
     return user;
 });
 const updateUser = (UserId, payload) => __awaiter(void 0, void 0, void 0, function* () {
@@ -44,6 +49,12 @@ const updateUser = (UserId, payload) => __awaiter(void 0, void 0, void 0, functi
     return updateUser;
 });
 const deleteUser = (UserId) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield prisma_1.default.member.findUnique({
+        where: { memberId: UserId },
+    });
+    if (!user) {
+        return new ApiError_1.default(http_status_1.default.NOT_FOUND, "User Not found");
+    }
     const result = yield prisma_1.default.member.delete({
         where: { memberId: UserId },
     });
