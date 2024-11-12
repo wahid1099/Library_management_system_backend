@@ -21,43 +21,38 @@ const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return newBook;
 });
-// const getAllBooks = async () => {
-//   const books = await prisma.book.findMany();
-//   return books;
-// };
-// const getSingleBooks = async (bookId: string) => {
-//   const book = await prisma.book.findUnique({
-//     where: { bookId: bookId },
-//   });
-//   return book;
-// };
-// const updateBook = async (
-//   bookId: string,
-//   payload: Partial<TBookUpdate>
-// ): Promise<TBook> => {
-//   const { title, genre, publishedYear, totalCopies, availableCopies } = payload;
-//   const updatedBook = await prisma.book.update({
-//     where: { bookId: bookId },
-//     data: {
-//       title,
-//       genre,
-//       publishedYear,
-//       totalCopies,
-//       availableCopies,
-//     },
-//   });
-//   return updatedBook;
-// };
-// const deleteBook = async (bookId: string) => {
-//   const result = await prisma.book.delete({
-//     where: { bookId: bookId },
-//   });
-//   return result;
-// };
+const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield prisma_1.default.member.findMany();
+    return users;
+});
+const getSingleUser = (UserId) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield prisma_1.default.member.findUnique({
+        where: { memberId: UserId },
+    });
+    return user;
+});
+const updateUser = (UserId, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, email, phone } = payload;
+    const updateUser = yield prisma_1.default.member.update({
+        where: { memberId: UserId },
+        data: {
+            name,
+            email,
+            phone,
+        },
+    });
+    return updateUser;
+});
+const deleteUser = (UserId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield prisma_1.default.member.delete({
+        where: { memberId: UserId },
+    });
+    return result;
+});
 exports.UserService = {
     createUser,
-    //   getAllBooks,
-    //   getSingleBooks,
-    //   updateBook,
-    //   deleteBook,
+    getAllUser,
+    getSingleUser,
+    updateUser,
+    deleteUser,
 };

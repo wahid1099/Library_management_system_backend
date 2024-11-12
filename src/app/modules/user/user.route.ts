@@ -6,11 +6,11 @@ import express from "express";
 
 const router = express.Router();
 
-// GET all books
-// router.get("/", BookController.getAllBooksfromDb);
+// GET all user
+router.get("/", UserController.getAllUsersfromDb);
 
-// // GET a single book by ID
-// router.get("/:bookId", BookController.getSingleBookfromDb);
+// GET a single user by ID
+router.get("/:userId", UserController.getSingleUserfromDb);
 
 // POST a new user
 router.post(
@@ -19,10 +19,10 @@ router.post(
   UserController.inserUserIntoDB
 );
 
-// // PUT (update) an existing book by ID
-// router.put("/:bookId", BookController.updateBookIntoDb);
+// PUT (update) an existing book by ID
+router.put("/:userId", UserController.updateUserIntoDb);
 
-// // DELETE a book by ID
-// router.delete("/:bookId", BookController.deleteBookfromDb);
+// DELETE a book by ID
+router.delete("/:userId", UserController.deleteUserfromDb);
 
 export const UserRoutes = router;

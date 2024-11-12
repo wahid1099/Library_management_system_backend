@@ -12,48 +12,46 @@ const createUser = async (
   return newBook;
 };
 
-// const getAllBooks = async () => {
-//   const books = await prisma.book.findMany();
-//   return books;
-// };
+const getAllUser = async () => {
+  const users = await prisma.member.findMany();
+  return users;
+};
 
-// const getSingleBooks = async (bookId: string) => {
-//   const book = await prisma.book.findUnique({
-//     where: { bookId: bookId },
-//   });
-//   return book;
-// };
+const getSingleUser = async (UserId: string) => {
+  const user = await prisma.member.findUnique({
+    where: { memberId: UserId },
+  });
+  return user;
+};
 
-// const updateBook = async (
-//   bookId: string,
-//   payload: Partial<TBookUpdate>
-// ): Promise<TBook> => {
-//   const { title, genre, publishedYear, totalCopies, availableCopies } = payload;
-//   const updatedBook = await prisma.book.update({
-//     where: { bookId: bookId },
-//     data: {
-//       title,
-//       genre,
-//       publishedYear,
-//       totalCopies,
-//       availableCopies,
-//     },
-//   });
-//   return updatedBook;
-// };
+const updateUser = async (
+  UserId: string,
+  payload: Partial<TMemberUpdate>
+): Promise<TMember> => {
+  const { name, email, phone } = payload;
+  const updateUser = await prisma.member.update({
+    where: { memberId: UserId },
+    data: {
+      name,
+      email,
+      phone,
+    },
+  });
+  return updateUser;
+};
 
-// const deleteBook = async (bookId: string) => {
-//   const result = await prisma.book.delete({
-//     where: { bookId: bookId },
-//   });
+const deleteUser = async (UserId: string) => {
+  const result = await prisma.member.delete({
+    where: { memberId: UserId },
+  });
 
-//   return result;
-// };
+  return result;
+};
 
 export const UserService = {
   createUser,
-  //   getAllBooks,
-  //   getSingleBooks,
-  //   updateBook,
-  //   deleteBook,
+  getAllUser,
+  getSingleUser,
+  updateUser,
+  deleteUser,
 };
