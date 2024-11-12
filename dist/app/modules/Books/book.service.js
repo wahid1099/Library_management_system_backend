@@ -32,7 +32,7 @@ const getSingleBooks = (bookId) => __awaiter(void 0, void 0, void 0, function* (
         where: { bookId: bookId },
     });
     if (!book) {
-        return new ApiError_1.default(http_status_1.default.NOT_FOUND, "Book not found");
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "Book not found");
     }
     return book;
 });
@@ -55,7 +55,7 @@ const deleteBook = (bookId) => __awaiter(void 0, void 0, void 0, function* () {
         where: { bookId: bookId },
     });
     if (!book) {
-        return new ApiError_1.default(http_status_1.default.NOT_FOUND, "Book not found");
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "Book not found");
     }
     const result = yield prisma_1.default.book.delete({
         where: { bookId: bookId },

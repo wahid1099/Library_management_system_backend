@@ -32,7 +32,7 @@ const getSingleUser = (UserId) => __awaiter(void 0, void 0, void 0, function* ()
         where: { memberId: UserId },
     });
     if (!user) {
-        return new ApiError_1.default(http_status_1.default.NOT_FOUND, "User Not found");
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User Not found");
     }
     return user;
 });
@@ -53,7 +53,7 @@ const deleteUser = (UserId) => __awaiter(void 0, void 0, void 0, function* () {
         where: { memberId: UserId },
     });
     if (!user) {
-        return new ApiError_1.default(http_status_1.default.NOT_FOUND, "User Not found");
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User Not found");
     }
     const result = yield prisma_1.default.member.delete({
         where: { memberId: UserId },

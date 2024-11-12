@@ -25,7 +25,7 @@ const getSingleUser = async (UserId: string) => {
     where: { memberId: UserId },
   });
   if (!user) {
-    return new ApiError(httpStatus.NOT_FOUND, "User Not found");
+    throw new ApiError(httpStatus.NOT_FOUND, "User Not found");
   }
   return user;
 };
@@ -52,7 +52,7 @@ const deleteUser = async (UserId: string) => {
     where: { memberId: UserId },
   });
   if (!user) {
-    return new ApiError(httpStatus.NOT_FOUND, "User Not found");
+    throw new ApiError(httpStatus.NOT_FOUND, "User Not found");
   }
   const result = await prisma.member.delete({
     where: { memberId: UserId },

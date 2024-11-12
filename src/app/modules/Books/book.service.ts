@@ -23,7 +23,7 @@ const getSingleBooks = async (bookId: string) => {
     where: { bookId: bookId },
   });
   if (!book) {
-    return new ApiError(httpStatus.NOT_FOUND, "Book not found");
+    throw new ApiError(httpStatus.NOT_FOUND, "Book not found");
   }
   return book;
 };
@@ -52,7 +52,7 @@ const deleteBook = async (bookId: string) => {
     where: { bookId: bookId },
   });
   if (!book) {
-    return new ApiError(httpStatus.NOT_FOUND, "Book not found");
+    throw new ApiError(httpStatus.NOT_FOUND, "Book not found");
   }
   const result = await prisma.book.delete({
     where: { bookId: bookId },
@@ -60,9 +60,6 @@ const deleteBook = async (bookId: string) => {
 
   return result;
 };
-
-
-
 
 export const BookService = {
   createBook,
