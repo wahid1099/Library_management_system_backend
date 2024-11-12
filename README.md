@@ -94,7 +94,3 @@ Follow these steps to set up the project locally:
 - **Date Validation**: `membershipDate` and other date fields may require specific formats, or they could return validation errors.
 
 ---
-
-## Professional Formatting
-
-This README is structured for clarity, making it easy for developers to navigate and understand the project setup, dependencies, and key features. Update sections as necessary to reflect any changes in the project structure.
