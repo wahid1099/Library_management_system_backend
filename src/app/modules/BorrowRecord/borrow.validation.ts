@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 const BorrowRecordSchemaCreate = z.object({
-  borrowId: z.string().uuid(),
   borrowDate: z.date(),
   returnDate: z.date().nullable().optional(),
   bookId: z.string().uuid(),

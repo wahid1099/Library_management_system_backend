@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookService = void 0;
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
+const ApiError_1 = __importDefault(require("../../errors/ApiError"));
+const http_status_1 = __importDefault(require("http-status"));
 // Define createBook function to insert a new book into the database
 const createBook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const newBook = yield prisma_1.default.book.create({
@@ -29,6 +31,9 @@ const getSingleBooks = (bookId) => __awaiter(void 0, void 0, void 0, function* (
     const book = yield prisma_1.default.book.findUnique({
         where: { bookId: bookId },
     });
+    if (!book) {
+        return new ApiError_1.default(http_status_1.default.NOT_FOUND, "Book not found");
+    }
     return book;
 });
 const updateBook = (bookId, payload) => __awaiter(void 0, void 0, void 0, function* () {
@@ -46,6 +51,12 @@ const updateBook = (bookId, payload) => __awaiter(void 0, void 0, void 0, functi
     return updatedBook;
 });
 const deleteBook = (bookId) => __awaiter(void 0, void 0, void 0, function* () {
+    const book = yield prisma_1.default.book.findUnique({
+        where: { bookId: bookId },
+    });
+    if (!book) {
+        return new ApiError_1.default(http_status_1.default.NOT_FOUND, "Book not found");
+    }
     const result = yield prisma_1.default.book.delete({
         where: { bookId: bookId },
     });
